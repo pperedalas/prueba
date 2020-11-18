@@ -1,0 +1,15 @@
+<div class="col-md-12" *ngIf="!post">
+    Loading...
+</div>
+
+<div class="col-md-12 mt-3 mb-5" *ngIf="post">
+    <h1>
+        {{post.title}}
+    </h1>
+    <hr>
+    <p>
+        <small class="text-secondary">category: </small>{{post.category.name}} &nbsp;&nbsp;<small class="text-secondary">author: </small><a [routerLink]="['/profile', post.user.id]" class="text-dark">{{post.user.name}}</a>
+    </p>
+    <hr>
+    <div [innerHTML]="post.content" class="text-secondary"></div>
+</div>

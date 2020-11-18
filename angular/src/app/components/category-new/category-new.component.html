@@ -1,0 +1,26 @@
+<div class="col-md-12 mt-3">
+    <h2 class="col-12 pl-5">{{page_title}}</h2>
+    <hr>
+
+    <div class="alert alert-success" *ngIf="status == 'success'">
+        Category created successfully
+    </div>
+    <div class="alert alert-danger" *ngIf="status == 'error'">
+        Error creating category
+    </div>
+    <!-- Settings form -->
+    <form #categoryForm="ngForm" (ngSubmit)="onSubmit(categoryForm)" class="col-md-7">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" name="name" class="form-control" placeholder="Name" #name="ngModel" [(ngModel)]=category.name
+                required>
+            <small *ngIf="!name.valid && name.touched" class="invalid-feedback d-block">
+                Invalid name
+            </small>
+        </div>
+        <button type="submit" class="btn btn-primary py-1 px-4" [disabled]="categoryForm.invalid">
+            Submit
+        </button>
+    </form>
+    
+</div>

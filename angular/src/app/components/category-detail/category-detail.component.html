@@ -1,0 +1,73 @@
+<div class="loading-mask" *ngIf="!category">
+    <div class="loading"></div>
+</div>
+
+<div class="container-fluid" *ngIf="category">
+    <h2 class="col-12 pl-5"><span class="text-secondary">Category: </span>{{category.name}}</h2>
+    <hr>
+
+    <div class="loading-mask" *ngIf="!posts">
+        <div class="loading"></div>
+    </div>
+
+    <div class="alert alert-warning" *ngIf="posts && posts.length == 0">
+        There are no posts in this category.
+    </div>
+
+    <div class="card-columns mt-4" *ngIf="posts && posts.length >= 1">
+        <article class="card w-100" *ngFor="let post of posts">
+
+            <div class="card-header">
+                <h3>
+                    <a [routerLink]="['/post', post.id]" class=" text-dark">{{post.title}}</a>
+                </h3>
+            </div>
+
+            <div class="card-body">
+                <!-- Image -->
+                <div class="post-image w-100" *ngIf="post.image">
+                    <img src="{{ url + 'post/image/' + post.image }}" class="w-100">
+                </div>
+                <div class="post-image w-100" *ngIf="!post.image">
+                    <img src="../../../assets/images/placeholder-image.png" class="w-100">
+                </div>
+                <!-- Buttons -->
+                <div class="post-buttons mt-2">
+                    <a [routerLink]="['/post', post.id]" class="btn btn-success px-3 py-1 m-1">Read</a>
+                    <span *ngIf="identity && (identity.sub == post.user_id || identity.role == 'ROLE_ADMIN')">
+                        <a [routerLink]="['/edit-post', post.id]" class="btn btn-primary px-3 py-1 m-1">Edit</a>
+
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-danger px-3 py-1 m-1" data-toggle="modal" [attr.data-target]="'#modal'+post.id">
+                            Delete
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" [attr.id]="'modal'+post.id" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">
+                                            Are you sure you want to delete the post "{{post.title}}"?</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Not really...</button>
+                                        <button (click)=deletePost(post.id) type="button" class="btn btn-primary"
+                                        data-dismiss="modal">Yes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </span>
+                </div>
+            </div>
+
+        </article>
+    </div>
+
+</div>

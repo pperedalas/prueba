@@ -1,0 +1,53 @@
+<div class="col-md-12 mt-3">
+    <h2 class="col-12 pl-5">{{page_title}}</h2>
+    <hr>
+    <div class="alert alert-success" *ngIf="status == 'success'">
+        Succesfull update
+    </div>
+    <div class="alert alert-danger" *ngIf="status == 'error'">
+        Error updating data
+    </div>
+    <!-- Settings form -->
+    <form class="col-md-7 m-0 p-0 mb-5" #userEditForm="ngForm" (ngSubmit)="onSubmit(userEditForm)">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" name="name" class="form-control" placeholder="Name" #name="ngModel" [(ngModel)]=user.name
+                required pattern="[a-zA-Z]+">
+            <small *ngIf="!name.valid && name.touched" class="invalid-feedback d-block">
+                Invalid name
+            </small>
+        </div>
+
+        <div class="form-group">
+            <label for="surname">surname</label>
+            <input type="text" name="surname" class="form-control" placeholder="surname" #surname="ngModel"
+                [(ngModel)]=user.surname required pattern="[a-zA-Z]+">
+            <small *ngIf="!surname.valid && surname.touched" class="invalid-feedback d-block">
+                Invalid surname
+            </small>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Biography</label>
+            <textarea [froalaEditor]="froala_options" name="description" class="form-control" placeholder="description" #description="ngModel"
+            [(ngModel)]=user.description
+            [froalaModel]=user.description
+            ></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Image</label>
+
+            <div *ngIf="identity && identity.image">
+                <img src="{{ url + 'user/avatar/' + identity.image }}" class="avatar-edit">
+            </div>
+
+            <angular-file-uploader [config]="afuConfig" [resetUpload]="true" (ApiResponse)="avatarUpload($event)">
+            </angular-file-uploader>
+        </div>
+
+        <button type="submit" class="btn btn-primary py-1 px-4" [disabled]="userEditForm.invalid">
+            Submit
+        </button>
+    </form>
+</div>

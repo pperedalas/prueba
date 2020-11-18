@@ -1,0 +1,8 @@
+<div class="loading-mask" *ngIf="!posts">
+  <div class="loading"></div>
+</div>
+
+<div class="container-fluid" *ngIf="posts">
+  <!-- POST LIST -->
+  <post-list [posts]="posts" [identity]="identity" [url]="url" (delete)="deletePost($event)"> </post-list>
+</div>

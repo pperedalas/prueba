@@ -1,0 +1,70 @@
+<div class="container">
+  <!-- MAIN CONTAINER -->
+  <nav class="navbar navbar-expand-lg navbar navbar-inverse bg-secondary mt-4">
+    <!-- NAVBAR -->
+    <a class="navbar-brand text-light" href="#">
+      <img src="assets/images/angular.png" width="30" height="30" class="d-inline-block align-top" alt="">
+      Blog SPA
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link text-light" [routerLink]="['index']">Index <span class="sr-only">(current)</span></a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Categories
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" [routerLink]="['category', category.id]" *ngFor="let category of categories">{{category.name}}</a>
+          </div>
+        </li>
+
+      </ul>
+      <ul class="navbar-nav navbar-right" *ngIf="!identity">
+        <li class="nav-item">
+          <a class="nav-link text-light" [routerLink]="['login']">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light" [routerLink]="['register']">Register</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav navbar-right" *ngIf="identity && identity.name">
+        <li *ngIf="identity && identity.image" class="nav-item">
+          <div class="avatar-mask">
+            <div class="avatar-mask-small">
+              <img src="{{ url + 'user/avatar/' + identity.image }}">
+            </div>
+          </div>
+        </li>
+        <li class="nav-item dropdown d-flex align-items-center">
+          <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            {{ identity.name }}
+            <span *ngIf="identity.surname">
+              {{ ' ' + identity.surname }}
+            </span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" [routerLink]="['new-post']">New post</a>
+            <a class="dropdown-item" [routerLink]="['new-category']">New category</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" [routerLink]="['profile', identity.sub]">My posts</a>
+            <a class="dropdown-item" [routerLink]="['settings']">Settings</a>
+            <a class="dropdown-item" [routerLink]="['logout/1']">Exit</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav><!-- END NAVBAR -->
+
+  <!-- CONTENT -->
+  <router-outlet></router-outlet>
+</div><!-- END MAIN CONTAINER -->

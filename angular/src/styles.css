@@ -1,0 +1,89 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+  background: radial-gradient(rgba(0, 0, 0, 0.05) 3px, transparent 4px),
+    radial-gradient(rgba(0, 0, 0, 0.05) 3px, transparent 4px),
+    linear-gradient(#fff 4px, transparent 0),
+    linear-gradient(
+      45deg,
+      transparent 74px,
+      transparent 75px,
+      #a4a4a4 75px,
+      #a4a4a4 76px,
+      transparent 77px,
+      transparent 109px
+    ),
+    linear-gradient(
+      -45deg,
+      transparent 75px,
+      transparent 76px,
+      #a4a4a4 76px,
+      #a4a4a4 77px,
+      transparent 78px,
+      transparent 109px
+    ),
+    #fff;
+  background-size: 109px 109px, 109px 109px, 100% 6px, 109px 109px, 109px 109px;
+  background-position: 54px 55px, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
+}
+.avatar-edit {
+  width: 200px;
+  margin-bottom: 10px;
+}
+.avatar-mask {
+  height: 50px;
+  width: 50px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 900px;
+}
+.avatar-mask-small {
+  position: relative;
+  float: right;
+  right: 50%;
+}
+.avatar-mask img {
+  width: 50px;
+  min-height: 50px;
+  position: relative;
+  right: -50%;
+}
+.avatar-mask-profile {
+  height: 90px;
+  width: 90px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 900px;
+}
+.avatar-mask-profile-small {
+  position: relative;
+  float: right;
+  right: 50%;
+}
+.avatar-mask-profile img {
+  width: 90px;
+  min-height: 90px;
+  position: relative;
+  right: -50%;
+}
+.post-image {
+  height: 200px;
+  overflow: hidden;
+}
+.loading {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+.loading-mask {
+  display: flex;
+  justify-content: center;
+  margin-top: 90px;
+}

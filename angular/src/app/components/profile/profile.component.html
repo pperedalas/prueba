@@ -1,0 +1,24 @@
+<div class="loading-mask" *ngIf="!posts">
+  <div class="loading"></div>
+</div>
+
+<div class="container-fluid" *ngIf="posts">
+  <div class="profile-card mt-3">
+    <div class="avatar-mask-profile float-left">
+      <div class="avatar-mask-small">
+        <img src="{{ url + 'user/avatar/' + identity.image }}" />
+      </div>
+    </div>
+    <div class="data-mask float-left">
+      <h2 class="col-12 pl-5">{{ user.name }}'s posts</h2>
+      <p [innerHTML]="user.description" class="col-12 pl-5"></p>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+
+  <hr />
+  
+  <!-- POST LIST -->
+  <post-list [posts]="posts" [identity]="identity" [url]="url" (delete)="deletePost($event)"> </post-list>
+
+</div>

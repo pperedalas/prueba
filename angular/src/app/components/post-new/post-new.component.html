@@ -1,0 +1,51 @@
+<div class="col-md-12 mt-3">
+    <h2 class="col-12 pl-5">{{page_title}}</h2>
+    <hr>
+    <div class="alert alert-success" *ngIf="status == 'success'">
+        Post created successfully
+    </div>
+    <div class="alert alert-danger" *ngIf="status == 'error'">
+        Error creating post
+    </div>
+    <!-- Settings form -->
+    <form #postForm="ngForm" (ngSubmit)="onSubmit(postForm)" class="col-md-7 mb-5">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" name="title" class="form-control" placeholder="Title" #title="ngModel" [(ngModel)]=post.title
+                required>
+            <small *ngIf="!title.valid && title.touched" class="invalid-feedback d-block">
+                Invalid title
+            </small>
+        </div>
+        <div class="form-group">
+            <label for="content">Content</label>
+            <textarea [froalaEditor]="froala_options" name="content" class="form-control" placeholder="Content" #content="ngModel"
+            [(ngModel)]=post.content
+            [froalaModel]=post.content
+            required></textarea>
+            <small *ngIf="!content.valid && content.touched" class="invalid-feedback d-block">
+                Invalid content
+            </small>
+        </div>
+        <div class="form-group">
+            <label for="category_id">Category</label>
+            <select name="category_id" #category="ngModel" [(ngModel)]="post.category_id" class="form-control">
+                <option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="image">Image</label>
+
+            <div *ngIf="post && post.image">
+                <img src="{{ url + 'post/image/' + post.image }}" class="avatar-edit">
+            </div>
+
+            <angular-file-uploader [config]="afuConfig" [resetUpload]="true" (ApiResponse)="imageUpload($event)">
+            </angular-file-uploader>
+        </div>
+        <button type="submit" class="btn btn-primary py-1 px-4" [disabled]="postForm.invalid">
+            Submit
+        </button>
+    </form>
+    
+</div>
